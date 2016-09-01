@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var hierarchySchema = new Schema({
     name: String,
     parentName: String,
-    childrenName: Array[String],
+    childrenName: String,
     type: String
 });
 
