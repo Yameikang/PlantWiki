@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var plantSchema = new Schema({
-    fullName: String,
+    fullName: {type:String, unique:true, required:true},
     appearanceDesp: String,
     description: String
 });
