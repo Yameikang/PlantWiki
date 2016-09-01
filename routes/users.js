@@ -53,7 +53,7 @@ router.get('/', function(req, res, next) {
           var linkList = $('div[style="float:left;margin-right:5px;"] a');
            // var linkList = [];
           linkList.map(function(i, link){
-              console.log($(link).attr('href'));
+              //console.log($(link).attr('href'));
             links.push('http://frps.eflora.cn/getfam.ashx?t='+$(link).attr('href').substring(3));
 
             request.get('http://frps.eflora.cn/getfam.ashx?t='+$(link).attr('href').substring(3))
@@ -82,31 +82,81 @@ router.get('/', function(req, res, next) {
                               /*
                               保存新添加的Hierarchy条目，并返回显示
                                */
-                              hierarchy.save(function(err){
+                              Hierarchy.findOne({name: hierarchy.name},function(err,doc){
                                   if(err){
-                                      res.render("Error");
-                                      return next();
+                                      console.log('findOne err: ' + err);
+                                      return;
                                   }
-
-                                  Hierarchy.find({}, function(err, docs){
-                                      if(err){
-                                          res.render("Error");
-                                          return next();
-                                      }
-                                      res.json(docs);
-                                  });
+                                  if(!doc){
+                                      hierarchy.save(function(err){
+                                          if(err){
+                                              //res.end("Error");
+                                              return next();
+                                          }
+                                      });
+                                  }
                               });
+
+                              /*request.get('frps.eflora.cn/frps/'+ hierarchy.name)
+                                  .end(function(err, response){
+                                      if(err)console.error(err);
+                                      else{
+                                          var $$$ = cheerio.load(response);
+                                          console.log($$$.html());
+                                          if($$$('div#divphoto').length > 0 ){
+                                              console.log($$$('p[style="text-indent:24px"]').text());
+                                          }else{
+                                              if($$$('div#listlower').length > 0){
+                                                  $$$('div#listlower span a').each(function(i,elem){
+                                                      console.log($$$(this).attr('href') + $$$(this).text());
+                                                  })
+                                              }
+                                          }
+                                      }
+                                  });*/
+                          }
+                          else if($$(this).text().substr(($$(this).text()).length -1, 1) == '科'){
+
+
+                              /*
+                               创建新的Hierarchy条目，并写入数据库
+                               */
+                              var hierarchy  = new Hierarchy({
+                                  name: data[i].substring(6),
+                                  parentName: "Unknown",
+                                  childrenName: "Unknown",
+                                  type:"科"
+                              });
+
+                              /*
+                               保存新添加的Hierarchy条目，并返回显示
+                               */
+                              Hierarchy.findOne({name: hierarchy.name},function(err,doc){
+                                  if(err){
+                                      console.log('findOne err: ' + err);
+                                      return;
+                                  }
+                                  if(!doc){
+                                      hierarchy.save(function(err){
+                                          if(err){
+                                              //res.end("Error");
+                                              return next();
+                                          }
+
+                                      });
+                                  }
+                              });
+
                           }
 
                       });
-                      console.log(data.toString());
+                      //console.log(data.toString());
                   }
                 });
           });
           console.log("已抓取成功"+links.length+"链接");
           console.log(links);
 
-           //getIAjaxUrlList(20);
           //getInfoFromLinks(links);
         }
       });
@@ -114,7 +164,8 @@ router.get('/', function(req, res, next) {
   //res.send('New resources');
     Hierarchy.find({}, function(err, docs){
         if(err){
-            res.end("Error");
+            //res.end("Error");
+            console.error(err);
             return next();
         }
         res.json(docs);
@@ -122,14 +173,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/restart',function(req, res, next){
-    Hierarchy.find({}, function(err, hierarchies){
-        if(err) throw err;
-        res.json(hierarchies);
 
-        //Hierarchy.removeAll({});
-    });
-});
 
 var getInfoFromLinks = function(links){
   console.log(links.length);
