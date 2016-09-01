@@ -6,6 +6,7 @@ var request = require('superagent');
 //mongodb model for storing plant information
 var mongoose = require('mongoose');
 var Plant = mongoose.model('Plant');
+var Hierarchy = mongoose.model('Hierarchy');
 
 
 
@@ -47,12 +48,12 @@ router.get('/', function(req, res, next) {
         }else{
           var $=cheerio.load(res.text);
 
-          //var data = $('div.divmain');
-          //console.log(data.html());
+
 
           var linkList = $('div[style="float:left;margin-right:5px;"] a');
            // var linkList = [];
           linkList.map(function(i, link){
+              console.log($(link).attr('href'));
             links.push('http://frps.eflora.cn/getfam.ashx?t='+$(link).attr('href').substring(3));
 
             request.get('http://frps.eflora.cn/getfam.ashx?t='+$(link).attr('href').substring(3))
@@ -64,13 +65,41 @@ router.get('/', function(req, res, next) {
                       var data = [];
                       $$('a').each(function(i,elem){
                           data[i] = $$(this).attr('href');
+                          //console.log(data[i] + $$(this).text().substr(($$(this).text()).length -1, 1));
+                          if($$(this).text().substr(($$(this).text()).length -1, 1) == '属'){
+                              //console.log(data[i] + "属");
+
+                              /*
+                              创建新的Hierarchy条目，并写入数据库
+                               */
+                              var hierarchy  = new Hierarchy({
+                                  name: data[i].substring(6),
+                                  parentName: "Unknown",
+                                  childrenName: "Unknown",
+                                  type:"属"
+                              });
+
+                              /*
+                              保存新添加的Hierarchy条目，并返回显示
+                               */
+                              hierarchy.save(function(err){
+                                  if(err){
+                                      res.render("Error");
+                                      return next();
+                                  }
+
+                                  Hierarchy.find({}, function(err, docs){
+                                      if(err){
+                                          res.render("Error");
+                                          return next();
+                                      }
+                                      res.json(docs);
+                                  });
+                              });
+                          }
+
                       });
                       console.log(data.toString());
-                    //console.log($$.html());
-                      //wiki.push();
-                      //var b = $$('a[style="color:#000000"]').attr('href');
-                      //var p = $$('a[style="color:#000000"]').html();
-                      //console.log(b + p +'\n');
                   }
                 });
           });
@@ -82,7 +111,24 @@ router.get('/', function(req, res, next) {
         }
       });
 
-  res.send('New resources');
+  //res.send('New resources');
+    Hierarchy.find({}, function(err, docs){
+        if(err){
+            res.end("Error");
+            return next();
+        }
+        res.json(docs);
+    });
+
+});
+
+router.get('/restart',function(req, res, next){
+    Hierarchy.find({}, function(err, hierarchies){
+        if(err) throw err;
+        res.json(hierarchies);
+
+        //Hierarchy.removeAll({});
+    });
 });
 
 var getInfoFromLinks = function(links){
