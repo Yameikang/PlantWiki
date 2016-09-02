@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var plantSchema = new Schema({
     fullName: {type:String, unique:true, required:true},
     appearanceDesp: String,
-    description: String
+    description: String,
+    link:{type:String, unique:true, required:true}
 });
 
 mongoose.model('Plant',plantSchema);
