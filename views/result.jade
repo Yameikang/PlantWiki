@@ -1,0 +1,297 @@
+extends layout
+
+block content
+    nav.navbar.navbar-inverse.navbar-fixed-top
+        .container-fluid
+            #navbar.navbar-collapse.collapse
+                .top-search
+                    form.navbar-form.navbar-right
+                        input.form-control(type='text', placeholder='Search...')
+                        input(type='submit', value=' ')
+        .clearfix
+    // <div class="stock_box">
+    .row
+        .col-md-2.stock_left
+            .w_sidebar
+                section.sky-form
+                    h4 Collections
+                    .col.col-4
+                        label.checkbox
+                            input(type='checkbox', name='checkbox', checked='')
+                            i
+                            | All images
+                    .col.col-4
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Standard
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Following
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Lorem Ipsum
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Injected humour
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Default model
+                section.sky-form
+                    h4 Freshness
+                    .col.col-4
+                        label.checkbox
+                            input(type='checkbox', name='checkbox', checked='')
+                            i
+                            | Any time
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Past 3 months
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Past month
+                    .col.col-4
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Past week
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Past 3 days
+                        label.checkbox
+                            input(type='checkbox', name='checkbox')
+                            i
+                            | Any time
+                section.sky-form
+                    h4 colour
+                    ul.w_nav2
+                        li
+                            a.color1(href='#')
+                        li
+                            a.color2(href='#')
+                        li
+                            a.color3(href='#')
+                        li
+                            a.color4(href='#')
+                        li
+                            a.color5(href='#')
+                        li
+                            a.color6(href='#')
+                        li
+                            a.color7(href='#')
+                        li
+                            a.color8(href='#')
+                        li
+                            a.color9(href='#')
+                        li
+                            a.color10(href='#')
+                        li
+                            a.color12(href='#')
+                        li
+                            a.color13(href='#')
+                        li
+                            a.color14(href='#')
+                        li
+                            a.color15(href='#')
+                        li
+                            a.color5(href='#')
+                        li
+                            a.color6(href='#')
+                        li
+                            a.color7(href='#')
+                        li
+                            a.color8(href='#')
+                        li
+                            a.color9(href='#')
+                        li
+                            a.color10(href='#')
+                section.sky-form
+                    h4 discount
+                    .col.col-4
+                        label.radio
+                            input(type='radio', name='radio', checked='')
+                            i
+                            | 60 % and above
+                        label.radio
+                            input(type='radio', name='radio')
+                            i
+                            | 50 % and above
+                        label.radio
+                            input(type='radio', name='radio')
+                            i
+                            | 40 % and above
+                    .col.col-4
+                        label.radio
+                            input(type='radio', name='radio')
+                            i
+                            | 30 % and above
+                        label.radio
+                            input(type='radio', name='radio')
+                            i
+                            | 20 % and above
+                        label.radio
+                            input(type='radio', name='radio')
+                            i
+                            | 10 % and above
+        .col-md-10.col-sm-offset-2.stock_right
+            // 第一列
+            .main-grids
+                .top-grids
+                    .col-md-4.resent-grid.recommended-grid.slider-top-grids
+                        .resent-grid-img.recommended-grid-img
+                            a(href='single.html')
+                                img(src='images/t1.jpg', alt='')
+                            .time
+                                p 3:04
+                            .clck
+                                span.glyphicon.glyphicon-time(aria-hidden='true')
+                        .resent-grid-info.recommended-grid-info
+                            h3
+                                a.title.title-info(href='single.html') Pellentesque vitae pulvinar tortor nullam interdum metus a imperdiet
+                            ul
+                                li
+                                    p.author.author-info
+                                        a.author(href='#') John Maniya
+                                li.right-list
+                                    p.views.views-info 2,114,200 views
+                    .col-md-4.resent-grid.recommended-grid.slider-top-grids
+                        .resent-grid-img.recommended-grid-img
+                            a(href='single.html')
+                                img(src='images/t2.jpg', alt='')
+                            .time
+                                p 7:23
+                            .clck
+                                span.glyphicon.glyphicon-time(aria-hidden='true')
+                        .resent-grid-info.recommended-grid-info
+                            h3
+                                a.title.title-info(href='single.html') Interdum pellentesque vitae pulvinar tortor nullam metus a imperdiet
+                            ul
+                                li
+                                    p.author.author-info
+                                        a.author(href='#') John Maniya
+                                li.right-list
+                                    p.views.views-info 4,200 views
+                    .col-md-4.resent-grid.recommended-grid.slider-top-grids
+                        .resent-grid-img.recommended-grid-img
+                            a(href='single.html')
+                                img(src='images/t3.jpg', alt='')
+                            .time
+                                p 4:04
+                            .clck
+                                span.glyphicon.glyphicon-time(aria-hidden='true')
+                        .resent-grid-info.recommended-grid-info
+                            h3
+                                a.title.title-info(href='single.html') Nullam interdum metus a imperdiet pellentesque vitae pulvinar tortor
+                            ul
+                                li
+                                    p.author.author-info
+                                        a.author(href='#') John Maniya
+                                li.right-list
+                                    p.views.views-info 71,174 views
+                    .clearfix
+            // 第二列
+            .main-grids
+                .top-grids
+                    .col-md-4.resent-grid.recommended-grid.slider-top-grids
+                        .resent-grid-img.recommended-grid-img
+                            a(href='single.html')
+                                img(src='images/t1.jpg', alt='')
+                            .time
+                                p 3:04
+                            .clck
+                                span.glyphicon.glyphicon-time(aria-hidden='true')
+                        .resent-grid-info.recommended-grid-info
+                            h3
+                                a.title.title-info(href='single.html') Pellentesque vitae pulvinar tortor nullam interdum metus a imperdiet
+                            ul
+                                li
+                                    p.author.author-info
+                                        a.author(href='#') John Maniya
+                                li.right-list
+                                    p.views.views-info 2,114,200 views
+                    .col-md-4.resent-grid.recommended-grid.slider-top-grids
+                        .resent-grid-img.recommended-grid-img
+                            a(href='single.html')
+                                img(src='images/t2.jpg', alt='')
+                            .time
+                                p 7:23
+                            .clck
+                                span.glyphicon.glyphicon-time(aria-hidden='true')
+                        .resent-grid-info.recommended-grid-info
+                            h3
+                                a.title.title-info(href='single.html') Interdum pellentesque vitae pulvinar tortor nullam metus a imperdiet
+                            ul
+                                li
+                                    p.author.author-info
+                                        a.author(href='#') John Maniya
+                                li.right-list
+                                    p.views.views-info 4,200 views
+                    .col-md-4.resent-grid.recommended-grid.slider-top-grids
+                        .resent-grid-img.recommended-grid-img
+                            a(href='single.html')
+                                img(src='images/t3.jpg', alt='')
+                            .time
+                                p 4:04
+                            .clck
+                                span.glyphicon.glyphicon-time(aria-hidden='true')
+                        .resent-grid-info.recommended-grid-info
+                            h3
+                                a.title.title-info(href='single.html') Nullam interdum metus a imperdiet pellentesque vitae pulvinar tortor
+                            ul
+                                li
+                                    p.author.author-info
+                                        a.author(href='#') John Maniya
+                                li.right-list
+                                    p.views.views-info 71,174 views
+                    .clearfix
+            .clearfix
+    // footer
+    .footer
+        .footer-grids
+            .footer-bottom
+                ul
+                    li.languages
+                        select.form-control.bfh-countries(data-country='US')
+                            option(value='') 地区
+                            option Spanish
+                            option French
+                            option German
+                            option Italian
+                            option Chinese
+                            option Tagalog
+                            option Polish
+                    li.languages
+                        select.form-control.bfh-countries
+                            option(value='') Select Country
+                            option(value='AFG') Afghanistan
+                            option(value='ALA') ?land Islands
+                            option(value='ALB') Albania
+                            option(value='DZA') Algeria
+                            option(value='ASM') American Samoa
+                            option(value='AND') Andorra
+                            option(value='AGO') Angola
+                            option(value='AIA') Anguilla
+                            option(value='ATA') Antarctica
+                            option(value='ATG') Antigua and Barbuda
+                            option(value='ARG') Argentina
+                            option(value='ARM') Armenia
+                    li.languages
+                        select.form-control.bfh-countries(data-country='US')
+                            option(value='') Safety Off
+                            option(value='') Safety On
+                    li
+                        a.f-history(href='history.html') History
+                    li
+                        a.play-icon.popup-with-zoom-anim.f-history.f-help(href='#small-dialog5') Help
+            .copyRight
+                p
+                    | Collect from
+                    a(href='#') PlantWiki
+

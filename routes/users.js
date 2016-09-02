@@ -11,7 +11,7 @@ var Hierarchy = mongoose.model('Hierarchy');
 
 
 var url = 'http://frps.eflora.cn/v/1';
-//url = 'http://frps.eflora.cn/name/a';
+var url1 = 'http://frps.eflora.cn/name/a';
 
 var links = [], wiki = [];
 
@@ -20,7 +20,8 @@ router.get('/test', function(req, res, next){
     var plant = new Plant({
         fullname: "test",
         appearanceDesp: "test",
-        description: "test"
+        description: "test",
+        link:"test"
     });
 
     plant.save(function(err){
@@ -37,6 +38,8 @@ router.get('/test', function(req, res, next){
             res.json(docs);
         });
     });
+
+
 });
 
 /* GET users listing. */
@@ -61,7 +64,7 @@ router.get('/', function(req, res, next) {
                   if(error) console.error(error);
                   else{
                       //console.log(link);
-                    var $$ = cheerio.load(response.text);
+                      var $$ = cheerio.load(response.text);
                       var data = [];
                       $$('a').each(function(i,elem){
                           data[i] = $$(this).attr('href');
@@ -75,9 +78,11 @@ router.get('/', function(req, res, next) {
                               var hierarchy  = new Hierarchy({
                                   name: data[i].substring(6),
                                   parentName: "Unknown",
-                                  childrenName: "Unknown",
+                                  childrenName: [],
                                   type:"属"
                               });
+
+                              //console.log($$('div#listlower'));
 
                               /*
                               保存新添加的Hierarchy条目，并返回显示
@@ -94,9 +99,17 @@ router.get('/', function(req, res, next) {
                                               return next();
                                           }
                                       });
+                                  }else{
+                                      hierarchy.update(function(err){
+                                          if(err){
+                                              //res.end("Error");
+                                              return next();
+                                          }
+                                      });
                                   }
                               });
 
+                              //request.get('')
                               /*request.get('frps.eflora.cn/frps/'+ hierarchy.name)
                                   .end(function(err, response){
                                       if(err)console.error(err);
@@ -124,7 +137,7 @@ router.get('/', function(req, res, next) {
                               var hierarchy  = new Hierarchy({
                                   name: data[i].substring(6),
                                   parentName: "Unknown",
-                                  childrenName: "Unknown",
+                                  childrenName: [],
                                   type:"科"
                               });
 
@@ -194,17 +207,6 @@ var getInfoFromLinks = function(links){
               console.log(b + p);
 
 
-              //var t = $('a').attr('href');
-              //console.log(t.toString());
-              /*request.get('http://frps.eflora.cn' + t.toString())
-               .end(function (err, res) {
-               if (err) console.error(err);
-               else {
-               var $$$ = cheerio.load(res.text);
-               //console.log($$$.html());
-               //console.log(data.toString());
-               }
-               })*/
             }
           });
     })(tmp);
