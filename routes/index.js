@@ -6,19 +6,20 @@ var cheerio = require('cheerio');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  request.get('http://frps.eflora.cn/getfam.ashx?t=3(1)')
+  request.get('http://frps.eflora.cn/frps/Serratula%20suffruticosa')
       .end(function(error, response){
         if(error) console.error(error);
         else{
           var $ = cheerio.load(response.text);
-          //console.log($.html());
+          console.log($('p[style="text-indent:24px"]').text());
 
-            var data = [];
+
+            /*var data = [];
             $('a').each(function(i, elem){
                 data[i] = $(this).attr('href');
             });
 
-            console.log(data.toString());
+            console.log(data.toString());*/
 
 
             /*request.get('http://frps.eflora.cn'+data.toString())
