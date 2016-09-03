@@ -36,7 +36,7 @@ block content
       .span_1_of_1
     // 输入框+搜索按钮
     .search
-      form.navbar-form.navbar-right
+      form.navbar-form.navbar-right(action='/content', method='post')
         input.form-control(type='text', placeholder='Search...')
         input(type='submit', value=' ')
   .grid_1
